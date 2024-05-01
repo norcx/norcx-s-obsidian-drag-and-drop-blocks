@@ -1,6 +1,8 @@
 ![GitHub latest release](https://img.shields.io/github/v/release/GitMurf/obsidian-drag-and-drop-blocks?style=for-the-badge&sort=semver)
 ![GitHub All Releases](https://img.shields.io/github/downloads/GitMurf/obsidian-drag-and-drop-blocks/total?style=for-the-badge)
 
+# note
+改变了触法方式，更方便地创建块引用
 # IMPORTANT NOTE - As of September 2022 this plugin is Deprecated and no longer under Development
 
 See details here: https://github.com/GitMurf/obsidian-drag-and-drop-blocks/issues/36#issuecomment-1251469845

@@ -412,7 +412,7 @@ function setupBlockDragStart(thisApp: App, thisPlugin: MyPlugin, evt: DragEvent)
         thisPlugin.blockRefSource.type = blockType;
 
         //Check to see if it is a Header line
-        if (lineContent.startsWith('#') && !!thisPlugin.blockRefModDrag.alt) {
+        if (lineContent.startsWith('#') && thisPlugin.blockRefModDrag.alt) {
             let mdCache: CachedMetadata = thisApp.metadataCache.getFileCache(mdView.file);
             let cacheHeaders: HeadingCache[] = mdCache.headings;
             let startLevel: number;
@@ -444,17 +444,17 @@ function setupBlockDragStart(thisApp: App, thisPlugin: MyPlugin, evt: DragEvent)
             evt.dataTransfer.setData("text/plain", lineContent);
 
             //Copy
-            if (!thisPlugin.blockRefModDrag.ctrl && !!thisPlugin.blockRefModDrag.alt && thisPlugin.blockRefModDrag.shift) {
+            if (!thisPlugin.blockRefModDrag.ctrl && thisPlugin.blockRefModDrag.alt && thisPlugin.blockRefModDrag.shift) {
                 thisPlugin.blockRefDragType = "copy-header";
             }
             //Move
-            if (!thisPlugin.blockRefModDrag.ctrl && !!thisPlugin.blockRefModDrag.alt && !thisPlugin.blockRefModDrag.shift) {
+            if (!thisPlugin.blockRefModDrag.ctrl && thisPlugin.blockRefModDrag.alt && !thisPlugin.blockRefModDrag.shift) {
                 thisPlugin.blockRefDragType = "move-header";
             }
         }
 
         //Check to see if it is a code block
-        if (blockType === 'code' && !!thisPlugin.blockRefModDrag.alt) {
+        if (blockType === 'code' && thisPlugin.blockRefModDrag.alt) {
             selectEntireLine(mdEditor, blockTypeObj.start, blockTypeObj.end);
             thisPlugin.blockRefSource.lnStart = blockTypeObj.start;
             thisPlugin.blockRefSource.lnEnd = blockTypeObj.end;
@@ -462,17 +462,17 @@ function setupBlockDragStart(thisApp: App, thisPlugin: MyPlugin, evt: DragEvent)
             evt.dataTransfer.setData("text/plain", lineContent);
 
             //Copy
-            if (!thisPlugin.blockRefModDrag.ctrl && !!thisPlugin.blockRefModDrag.alt && thisPlugin.blockRefModDrag.shift) {
+            if (!thisPlugin.blockRefModDrag.ctrl && thisPlugin.blockRefModDrag.alt && thisPlugin.blockRefModDrag.shift) {
                 thisPlugin.blockRefDragType = "copy-code";
             }
             //Move
-            if (!thisPlugin.blockRefModDrag.ctrl && !!thisPlugin.blockRefModDrag.alt && !thisPlugin.blockRefModDrag.shift) {
+            if (!thisPlugin.blockRefModDrag.ctrl && thisPlugin.blockRefModDrag.alt && !thisPlugin.blockRefModDrag.shift) {
                 thisPlugin.blockRefDragType = "move-code";
             }
         }
 
         //Check to see if it is a list item
-        if (blockType === 'list' && !!thisPlugin.blockRefModDrag.alt) {
+        if (blockType === 'list' && thisPlugin.blockRefModDrag.alt) {
             //writeConsoleLog(`list item with children`);
             //writeConsoleLog(blockTypeObj);
             selectEntireLine(mdEditor, blockTypeObj.start, blockTypeObj.end);
@@ -484,17 +484,17 @@ function setupBlockDragStart(thisApp: App, thisPlugin: MyPlugin, evt: DragEvent)
             evt.dataTransfer.setData("text/plain", lineContent);
 
             //Copy
-            if (!thisPlugin.blockRefModDrag.ctrl && !!thisPlugin.blockRefModDrag.alt && thisPlugin.blockRefModDrag.shift) {
+            if (!thisPlugin.blockRefModDrag.ctrl && thisPlugin.blockRefModDrag.alt && thisPlugin.blockRefModDrag.shift) {
                 thisPlugin.blockRefDragType = "copy-list";
             }
             //Move
-            if (!thisPlugin.blockRefModDrag.ctrl && !!thisPlugin.blockRefModDrag.alt && !thisPlugin.blockRefModDrag.shift) {
+            if (!thisPlugin.blockRefModDrag.ctrl && thisPlugin.blockRefModDrag.alt && !thisPlugin.blockRefModDrag.shift) {
                 thisPlugin.blockRefDragType = "move-list";
             }
         }
 
         //Check to see if it is a block quote block
-        if (blockType === 'blockquote' && !!thisPlugin.blockRefModDrag.alt) {
+        if (blockType === 'blockquote' && thisPlugin.blockRefModDrag.alt) {
             selectEntireLine(mdEditor, blockTypeObj.start, blockTypeObj.end);
             thisPlugin.blockRefSource.lnStart = blockTypeObj.start;
             thisPlugin.blockRefSource.lnEnd = blockTypeObj.end;
@@ -502,17 +502,17 @@ function setupBlockDragStart(thisApp: App, thisPlugin: MyPlugin, evt: DragEvent)
             evt.dataTransfer.setData("text/plain", lineContent);
 
             //Copy
-            if (!thisPlugin.blockRefModDrag.ctrl && !!thisPlugin.blockRefModDrag.alt && thisPlugin.blockRefModDrag.shift) {
+            if (!thisPlugin.blockRefModDrag.ctrl && thisPlugin.blockRefModDrag.alt && thisPlugin.blockRefModDrag.shift) {
                 thisPlugin.blockRefDragType = "copy-quote";
             }
             //Move
-            if (!thisPlugin.blockRefModDrag.ctrl && !!thisPlugin.blockRefModDrag.alt && !thisPlugin.blockRefModDrag.shift) {
+            if (!thisPlugin.blockRefModDrag.ctrl && thisPlugin.blockRefModDrag.alt && !thisPlugin.blockRefModDrag.shift) {
                 thisPlugin.blockRefDragType = "move-quote";
             }
         }
 
         //No modifier keys held so move the block to the new location
-        if (!thisPlugin.blockRefModDrag.ctrl && !!thisPlugin.blockRefModDrag.alt && !thisPlugin.blockRefModDrag.shift) {
+        if (!thisPlugin.blockRefModDrag.ctrl && thisPlugin.blockRefModDrag.alt && !thisPlugin.blockRefModDrag.shift) {
             //Check to see if it is a Header line
             if (lineContent.startsWith('#') || blockType === 'code' || blockType === 'list') {
 
@@ -525,7 +525,7 @@ function setupBlockDragStart(thisApp: App, thisPlugin: MyPlugin, evt: DragEvent)
         }
 
         //Shift key held so copy the block to the new location
-        if (!thisPlugin.blockRefModDrag.ctrl && !!thisPlugin.blockRefModDrag.alt && thisPlugin.blockRefModDrag.shift) {
+        if (!thisPlugin.blockRefModDrag.ctrl && thisPlugin.blockRefModDrag.alt && thisPlugin.blockRefModDrag.shift) {
             //Check to see if it is a Header line
             if (lineContent.startsWith('#') || blockType === 'code' || blockType === 'list') {
 
@@ -544,7 +544,7 @@ function setupBlockDragStart(thisApp: App, thisPlugin: MyPlugin, evt: DragEvent)
                 finalString = lineContent;
                 blockid = lineContent.replace(/(\[|\]|#|\*|\(|\)|:|,)/g, "").replace(/(\||\.)/g, " ").trim();
                 //block = `${embedOrLink}[` + `[${mdView.file.path}#^${blockid}]]`;
-                block = `${embedOrLink}[`+`${mdView.file.name}]` + `(${mdView.file.path}#^${blockid})`;
+                block = `${embedOrLink}[`+`👉]` + `(${mdView.file.path}#^${blockid})`;
             } else {
                 //If a list, skip the logic for checking if a multi line markdown block
                 if (blockType === 'list') {
@@ -590,7 +590,7 @@ function setupBlockDragStart(thisApp: App, thisPlugin: MyPlugin, evt: DragEvent)
                     if (blockType !== 'list') { finalString = finalString.trim(); }
                 }
                 //block = `${embedOrLink}[` + `[${mdView.file.path}#^${blockid}]]`;
-                block = `${embedOrLink}[`+`${mdView.file.name}]` + `(${mdView.file.path}#^${blockid})`;
+                block = `${embedOrLink}[`+`👉]` + `(${mdView.file.path}#^${blockid})`;
             }
 
             //Text + Alias block ref
@@ -1254,7 +1254,7 @@ function setupEventListeners(thisApp: App, thisPlugin: MyPlugin) {
 
                         if (isListItem) {
                             //mdCache section types: paragraph | heading | list | code | blockquote | html
-                            if (`heading,code,html`.contains(thisPlugin.blockRefSource.type) && !!thisPlugin.blockRefModDrag.alt) {
+                            if (`heading,code,html`.contains(thisPlugin.blockRefSource.type) && thisPlugin.blockRefModDrag.alt) {
                                 prependStr = '';
                                 listChar = '';
                                 curSelection = `\n${curSelection}\n`
@@ -1332,7 +1332,7 @@ function setupEventListeners(thisApp: App, thisPlugin: MyPlugin) {
                     if (thisPlugin.blockRefSource.lnEnd === null) { thisPlugin.blockRefSource.lnEnd = thisPlugin.blockRefSource.lnDragged }
 
                     //No modifier keys held so move the block to the new location
-                    if (!thisPlugin.blockRefModDrag.ctrl && !!thisPlugin.blockRefModDrag.alt && !thisPlugin.blockRefModDrag.shift) {
+                    if (!thisPlugin.blockRefModDrag.ctrl && thisPlugin.blockRefModDrag.alt && !thisPlugin.blockRefModDrag.shift) {
                         //Delete the original line/section you dragged by setting it and the next line to the next line text
                         let startLine: number = thisPlugin.blockRefSource.lnStart;
                         let endLine: number = thisPlugin.blockRefSource.lnEnd;
@@ -1371,7 +1371,7 @@ function setupEventListeners(thisApp: App, thisPlugin: MyPlugin) {
                     }
 
                     //Shift key held so copy the block to the new location
-                    if (!thisPlugin.blockRefModDrag.ctrl && !!thisPlugin.blockRefModDrag.alt && thisPlugin.blockRefModDrag.shift) {
+                    if (!thisPlugin.blockRefModDrag.ctrl && thisPlugin.blockRefModDrag.alt && thisPlugin.blockRefModDrag.shift) {
                         //Do not have to do anything to the original block you dragged because it is just a copy / duplicate command
                     }
 
